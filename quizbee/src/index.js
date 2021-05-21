@@ -14,13 +14,26 @@ class QuizBee extends Component {
         responses: 0,
     };
 
+    // getQuestions = () => {
+    //     quizService().then(question => {
+    //         this.setState({
+    //             questionBank: question,
+    //         });
+    //     });
+    // };
+
     getQuestions = () => {
-        quizService().then(question => {
-            this.setState({
-                questionBank: question,
-            });
-        });
-    };
+        fetch("https://opentdb.com/api.php?amount=10")
+          .then(res => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                questionBank: result.results
+              });
+            })
+        console.log(this.state.questionBank)
+    }
+
 
     computeAnswer = (answer, correctAnswer) => {
         if (answer === correctAnswer) {
@@ -51,6 +64,7 @@ class QuizBee extends Component {
         return (
             <div className="container">
                 <div className="title">QuizBee</div>
+
                 {this.state.questionBank.length > 0 && 
                     this.state.responses < 5 &&
                     this.state.questionBank.map(
