@@ -2,7 +2,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import "./assets/style.css";
-import quizService from "./quizService";
 import QuestionBox from "./components/QuestionBox";
 import Result from "./components/Result";
 
@@ -13,14 +12,6 @@ class QuizBee extends Component {
         score: 0,
         responses: 0,
     };
-
-    // getQuestions = () => {
-    //     quizService().then(question => {
-    //         this.setState({
-    //             questionBank: question,
-    //         });
-    //     });
-    // };
 
     getQuestions = () => {
         fetch("https://opentdb.com/api.php?amount=10")
@@ -43,7 +34,7 @@ class QuizBee extends Component {
         }
 
         this.setState({
-            responses: this.state.responses < 5 ? this.state.responses + 1 : 5
+            responses: this.state.responses < 10 ? this.state.responses + 1 : 10
         })
     }
 
@@ -53,6 +44,17 @@ class QuizBee extends Component {
             score: 0,
             responses: 0,
         });
+    }
+
+    shuffle = (a) => {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
     }
 
     componentDidMount() {
@@ -66,20 +68,20 @@ class QuizBee extends Component {
                 <div className="title">QuizBee</div>
 
                 {this.state.questionBank.length > 0 && 
-                    this.state.responses < 5 &&
+                    this.state.responses < 10 &&
                     this.state.questionBank.map(
-                        ({question, answers, correct, questionIddddd}) => (
+                        (question, index) => (
                             <QuestionBox
-                                question={question}
-                                options={answers}
-                                key={questionId}
-                                selected={answer => this.computeAnswer(answer, correct)}
+                                question={question.question}
+                                options={question.incorrect_answers.concat(question.correct_answer)}
+                                key={index}
+                                selected={answer => this.computeAnswer(answer, question.correct_answer)}
                             />
                         )
                     )
                 }
 
-                {this.state.responses === 5 ? (<Result score={this.state.score} playAgain={this.playAgain} />) : null}
+                {this.state.responses === 10 ? (<Result score={this.state.score} playAgain={this.playAgain} />) : null}
             </div>
         );
     };
