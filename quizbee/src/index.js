@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import "./assets/style.css";
 import QuestionBox from "./components/QuestionBox";
 import Result from "./components/Result";
+import { questionAmount } from './config';
 
 class QuizBee extends Component {
 
@@ -14,7 +15,7 @@ class QuizBee extends Component {
     };
 
     getQuestions = () => {
-        fetch("https://opentdb.com/api.php?amount=10")
+        fetch(`https://opentdb.com/api.php?amount=${questionAmount}`)
           .then(res => res.json())
           .then(
             (result) => {
@@ -34,7 +35,7 @@ class QuizBee extends Component {
         }
 
         this.setState({
-            responses: this.state.responses < 10 ? this.state.responses + 1 : 10
+            responses: this.state.responses < questionAmount ? this.state.responses + 1 : questionAmount
         })
     }
 
@@ -68,7 +69,7 @@ class QuizBee extends Component {
                 <div className="title">QuizBee</div>
 
                 {this.state.questionBank.length > 0 && 
-                    this.state.responses < 10 &&
+                    this.state.responses < questionAmount &&
                     this.state.questionBank.map(
                         (question, index) => (
                             <QuestionBox
@@ -81,7 +82,7 @@ class QuizBee extends Component {
                     )
                 }
 
-                {this.state.responses === 10 ? (<Result score={this.state.score} playAgain={this.playAgain} />) : null}
+                {this.state.responses === questionAmount ? (<Result score={this.state.score} playAgain={this.playAgain} questionAmount={questionAmount}/>) : null}
             </div>
         );
     };
