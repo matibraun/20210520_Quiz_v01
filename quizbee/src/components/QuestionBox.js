@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 
 const QuestionBox = ({question, options, selected}) => {
-    const [answer, setAnswer] = useState(options);
+    const [answer, setAnswer] = useState(null);
     return (
         <div className="questionBox">
             <div className="question">{question}</div>
-            {answer.map((text, index) => (
+            {answer ? <button disabled={true}>{answer}</button> : options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
-                    setAnswer([text]);
+                    setAnswer(text);
                     selected(text)
                 }}>
                     {text}
