@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 
 const QuestionBox = ({question, options, selected}) => {
+    
     const [answer, setAnswer] = useState(null);
+
     return (
         <div className="questionBox">
             <div className="question">{question}</div>
@@ -18,3 +20,5 @@ const QuestionBox = ({question, options, selected}) => {
 }
 
 export default QuestionBox
+
+// Destructuring args
