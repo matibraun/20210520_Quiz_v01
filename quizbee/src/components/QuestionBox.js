@@ -1,17 +1,15 @@
 import React, {useState} from "react";
 
 const QuestionBox = ({question, options, selected}) => {
-    console.log('1111 las opciones para la pregunta', question, 'son', options)
-
     
-    const [answer, setAnswer] = useState(options);
-    console.log('las opciones para la pregunta', question, 'son', answer)
+    const [answer, setAnswer] = useState(null);
+
     return (
         <div className="questionBox">
             <div className="question">{question}</div>
-            {answer.map((text, index) => (
+            {answer ? <button disabled={true}>{answer}</button> : options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
-                    setAnswer([text]);
+                    setAnswer(text);
                     selected(text)
                 }}>
                     {text}
@@ -22,3 +20,5 @@ const QuestionBox = ({question, options, selected}) => {
 }
 
 export default QuestionBox
+
+// Destructuring args
