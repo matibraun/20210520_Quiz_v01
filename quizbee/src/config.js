@@ -1,1 +1,1 @@
-export const questionAmount = 3;
+export const questionAmount = 4;

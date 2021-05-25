@@ -10,7 +10,7 @@ const QuestionBox = ({question, options, selected}) => {
             {answer ? <button disabled={true}>{answer}</button> : options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
                     setAnswer(text);
-                    selected(text)
+                    selected(text);
                 }}>
                     {text}
                 </button>

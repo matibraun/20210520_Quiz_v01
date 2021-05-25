@@ -23,7 +23,6 @@ class QuizBee extends Component {
                 questionBank: result.results
               });
             })
-        console.log(this.state.questionBank)
     }
 
 
@@ -74,7 +73,7 @@ class QuizBee extends Component {
                         (question, index) => (
                             <QuestionBox
                                 question={question.question}
-                                options={this.shuffle(question.incorrect_answers.concat(question.correct_answer))}
+                                options={question.incorrect_answers.concat(question.correct_answer)}
                                 key={index}
                                 selected={answer => this.computeAnswer(answer, question.correct_answer)}
                             />
