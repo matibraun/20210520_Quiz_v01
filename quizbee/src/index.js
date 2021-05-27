@@ -48,7 +48,6 @@ class QuizBee extends Component {
 
         .then(response => {
 
-            console.log(response)
             const questions = formatQuestions(response.results)
             this.setState({
                 questionBank: questions,
@@ -58,13 +57,12 @@ class QuizBee extends Component {
     }
 
 
-    computeAnswer = (answer, correctAnswer) => {
-        if (answer === correctAnswer) {
+    computeAnswer = (answerEval) => {
+        if (answerEval === true) {
             this.setState({
                 score: this.state.score + 1
             })
         }
-
         this.setState({
             responses: this.state.responses < questionAmount ? this.state.responses + 1 : questionAmount
         })
@@ -98,8 +96,9 @@ class QuizBee extends Component {
                                 question={question.question}
                                 options={question.options}
                                 correctAnswer={question.correctAnswer}
+                                computePlay={(answerEval) => this.computeAnswer(answerEval)}
                                 key={index}
-                                selected={(answer) => this.computeAnswer(answer, question.correctAnswer)}
+                                // selected={(answer) => this.computeAnswer(answer, question.correctAnswer)}
                             />
                         )
                     )

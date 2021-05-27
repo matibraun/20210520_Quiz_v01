@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const QuestionBox = ({question, options, correctAnswer}) => {
+const QuestionBox = ({question, options, correctAnswer, computePlay}) => {
     
     const [answer, setAnswer] = useState(null);
     
@@ -14,6 +14,7 @@ const QuestionBox = ({question, options, correctAnswer}) => {
                 {options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
                     setAnswer(text);
+                    computePlay(text === correctAnswer);
                 }}>
                     {text}
                 </button>
@@ -32,7 +33,7 @@ const QuestionBox = ({question, options, correctAnswer}) => {
     
                 <div>
                     <button disabled={true}>{answer}</button>
-                    <div>Correcto</div>
+                    <div>Correcto!!!</div>
                 </div>
             
             </div>
@@ -40,7 +41,7 @@ const QuestionBox = ({question, options, correctAnswer}) => {
     }
 
     if (answer !== correctAnswer) {
-        
+
         return (
             <div className="questionBox">
     
@@ -48,8 +49,7 @@ const QuestionBox = ({question, options, correctAnswer}) => {
     
                 <div>
                     <button disabled={true}>{answer}</button>
-                    <div>La respuesta es incorrecta. La opcion correcta es:</div>
-                    <div>{correctAnswer}</div>
+                    <div>La respuesta es incorrecta. La opcion correcta es {correctAnswer}</div>
                 </div>
             
             </div>
