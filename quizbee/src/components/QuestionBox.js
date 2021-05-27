@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const QuestionBox = ({question, options, correctAnwer}) => {
+const QuestionBox = ({question, options, correctAnswer}) => {
     
     const [answer, setAnswer] = useState(null);
     
@@ -11,29 +11,51 @@ const QuestionBox = ({question, options, correctAnwer}) => {
     
                 <div className="question">{question}</div>
     
-                {options}.map((text, index) => (
+                {options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
                     setAnswer(text);
                 }}>
                     {text}
                 </button>
-                ))
+                ))}
             
             </div>
+        )    
     }
 
-            {answer
-            
-            ? 
-            <div>
-                <button disabled={true}>{answer}</button>
-                <div>Correcto</div>
-            </div>
-            
-            :
+    if (answer === correctAnswer) {
 
+        return (
+            <div className="questionBox">
+    
+                <div className="question">{question}</div>
+    
+                <div>
+                    <button disabled={true}>{answer}</button>
+                    <div>Correcto</div>
+                </div>
+            
+            </div>
+        )    
+    }
+
+    if (answer !== correctAnswer) {
         
-    )
+        return (
+            <div className="questionBox">
+    
+                <div className="question">{question}</div>
+    
+                <div>
+                    <button disabled={true}>{answer}</button>
+                    <div>La respuesta es incorrecta. La opcion correcta es:</div>
+                    <div>{correctAnswer}</div>
+                </div>
+            
+            </div>
+        )    
+    }
+
 }
 
 export default QuestionBox

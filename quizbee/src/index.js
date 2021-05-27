@@ -97,6 +97,7 @@ class QuizBee extends Component {
                             <QuestionBox
                                 question={question.question}
                                 options={question.options}
+                                correctAnswer={question.correctAnswer}
                                 key={index}
                                 selected={(answer) => this.computeAnswer(answer, question.correctAnswer)}
                             />
