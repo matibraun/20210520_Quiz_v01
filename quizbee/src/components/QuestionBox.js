@@ -6,15 +6,28 @@ const QuestionBox = ({question, options, selected}) => {
 
     return (
         <div className="questionBox">
+
             <div className="question">{question}</div>
-            {answer ? <button disabled={true}>{answer}</button> : options.map((text, index) => (
+
+            {answer
+            
+            ? 
+            <div>
+                <button disabled={true}>{answer}</button>
+                <div>Correcto</div>
+            </div>
+            
+            :
+            options.map((text, index) => (
                 <button key={index} className="answerBtn" onClick={() => {
                     setAnswer(text);
                     selected(text);
                 }}>
                     {text}
                 </button>
-            ))}
+            ))
+            }
+
         </div>
     )
 }
