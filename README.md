@@ -3,3 +3,4 @@
 # Javascript, React
 
 # Class component base react project, state management, lifecycles methods (componentDidMount, componentDidUpdate, componentDidUnmount), project structuring, fetch data from API, promisses, ternary expressions.
+
